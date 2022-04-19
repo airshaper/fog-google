@@ -120,7 +120,8 @@ module Fog
         # {
         #   :automatic_restart => true,
         #   :on_host_maintenance => "MIGRATE",
-        #   :preemptible=>false
+        #   :preemptible=>false,
+        #   :provisioning_model=>"SPOT"
         # }
         # @return [Hash]
         attribute :scheduling
@@ -378,13 +379,15 @@ module Fog
         def set_scheduling(async = true,
                            on_host_maintenance: nil,
                            automatic_restart: nil,
-                           preemptible: nil)
+                           preemptible: nil,
+                           provisioning_model: nil)
           requires :identity, :zone
           data = service.set_server_scheduling(
             identity, zone_name,
             :on_host_maintenance => on_host_maintenance,
             :automatic_restart => automatic_restart,
             :preemptible => preemptible
+            :provisioning_model => provisioning_model
           )
 
           operation = Fog::Compute::Google::Operations
