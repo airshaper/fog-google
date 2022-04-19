@@ -121,7 +121,8 @@ module Fog
         #   :automatic_restart => true,
         #   :on_host_maintenance => "MIGRATE",
         #   :preemptible=>false,
-        #   :provisioning_model=>"SPOT"
+        #   :provisioning_model=>"SPOT",
+        #   :instance_termination_action=>"DELETE"
         # }
         # @return [Hash]
         attribute :scheduling
@@ -380,14 +381,16 @@ module Fog
                            on_host_maintenance: nil,
                            automatic_restart: nil,
                            preemptible: nil,
-                           provisioning_model: nil)
+                           provisioning_model: nil,
+                           instance_termination_action: nil)
           requires :identity, :zone
           data = service.set_server_scheduling(
             identity, zone_name,
             :on_host_maintenance => on_host_maintenance,
             :automatic_restart => automatic_restart,
             :preemptible => preemptible,
-            :provisioning_model => provisioning_model
+            :provisioning_model => provisioning_model,
+            :instance_termination_action => instance_termination_action,
           )
 
           operation = Fog::Compute::Google::Operations
