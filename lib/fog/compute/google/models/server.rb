@@ -386,7 +386,7 @@ module Fog
             identity, zone_name,
             :on_host_maintenance => on_host_maintenance,
             :automatic_restart => automatic_restart,
-            :preemptible => preemptible
+            :preemptible => preemptible,
             :provisioning_model => provisioning_model
           )
 
